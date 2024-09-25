@@ -9,6 +9,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.main.js';
 import JsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+import { useRoute } from 'vue-router';
 
 // 解决 vite Monaco 提示错误
 self.MonacoEnvironment = {
@@ -33,8 +34,17 @@ onBeforeUnmount(() => {
 
 // 从后端获取代码内容
 const fetchData = async () => {
+  const route = useRoute();
+  const codeId = route.params.codeId; // 获取codeId
+
   try {
-    const response = await fetch('http://127.0.0.1:8001/code/info'); // 使用完整地址
+    const response = await fetch('http://127.0.0.1:8001/code/info', { // 使用完整地址
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ key: codeId }), // 将codeId作为body中的key
+    });
 
     if (!response.ok) {
       throw new Error('网络错误');
