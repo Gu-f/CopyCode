@@ -13,6 +13,12 @@ CORS(app)
 cache = dc.Cache('disk_cache')
 
 
+# 捕获所有其他异常
+@app.errorhandler(Exception)
+def handle_exception(e):
+    return 'error'
+
+
 # Define route to handle POST requests for saving code data
 @app.route('/code/save', methods=['POST'])
 def save_code():
