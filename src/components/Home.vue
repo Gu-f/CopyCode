@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="form-group" style="width: 33.33%; margin-bottom: 10px;">
-      <label for="languageSelect" style="color: white">请选择代码语言</label>
+      <label for="languageSelect" style="color: white">请选择代码语言 - <a href="https://github.com/Gu-f/CopyCode">Github开源地址</a></label>
       <select id="languageSelect" v-model="selectedLanguage" class="form-control" @change="changeLanguage" style="background-color: #1E1E1E; color: white">
         <option value="python">Python</option>
         <option value="text">Text</option>
